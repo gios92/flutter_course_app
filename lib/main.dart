@@ -9,57 +9,68 @@ import 'package:flutter/material.dart';
 //chiamiamo il metodo main con la notazione 'arrow function'
 void main() => runApp(MyApp());
 
-int questionIndex = 0;
-
-void rispostaAllaDomanda() {
-  questionIndex = questionIndex + 1;
-  print(questionIndex);
-}
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('La mia prima applicazione in Flutter'),
-              backgroundColor: Color(0xffC19556),
-            ),
-            body: Center(
-              child: Body(),
-            )));
+  State<StatefulWidget> createState() {
+    return MyAppState();
   }
 }
 
-class Body extends StatelessWidget {
-  final List<String> questions = [
-    'Qual\'è il tuo colore preferito?',
-    'Qual\'è il tuo animale preferito?'
-  ];
+class MyAppState extends State<MyApp> {
+  int questionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      questionIndex = questionIndex + 1;
+    });
+
+    print(questionIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(questions[questionIndex]),
-        RaisedButton(
-          child: Text('Risposta 1'),
-          onPressed: () {
-            // ...
-            int a = 2;
-            int b = 5;
-            print(a + b);
-          },
+    List<String> questions = [
+      'What\'s your favorite color?',
+      'What\'s your favorite animal?',
+      'What\'s your favorite color?',
+      'What\'s your favorite animal?',
+      'What\'s your favorite color?',
+      'What\'s your favorite animal?',
+    ];
+
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+          backgroundColor: Color(0xffC19556),
         ),
-        RaisedButton(
-          child: Text('Risposta 2'),
-          onPressed: () => rispostaAllaDomanda,
+        body: Column(
+          children: [
+            Text(
+              questions[questionIndex],
+            ),
+            RaisedButton(
+              child: Text('Answer 1'),
+              onPressed: () {
+                // ...
+                int a = 2;
+                int b = 5;
+                print(a + b);
+              },
+            ),
+            RaisedButton(
+              child: Text('Answer 2'),
+              onPressed: answerQuestion,
+            ),
+            RaisedButton(
+              child: Text('Answer 3'),
+              onPressed: () {
+                print('pressed button number 3!');
+              },
+            ),
+          ],
         ),
-        RaisedButton(
-          child: Text('Risposta 3'),
-          onPressed: () => rispostaAllaDomanda,
-        ),
-      ],
+      ),
     );
   }
 }
