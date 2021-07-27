@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 //funzione eseguita quando l'app viene lanciata
 
@@ -45,32 +46,17 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('My First App'),
-          backgroundColor: Color(0xffC19556),
+          // backgroundColor: Color(0xffC19556),
+          backgroundColor: Colors.blue,
         ),
         body: Column(
           children: [
             Question(
               questions[_questionIndex],
             ),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed: () {
-                // ...
-                int _a = 2;
-                int _b = 5;
-                print(_a + _b);
-              },
-            ),
-            RaisedButton(
-              child: Text('Answer 2'),
-              onPressed: _answerQuestion,
-            ),
-            RaisedButton(
-              child: Text('Answer 3'),
-              onPressed: () {
-                print('pressed button number 3!');
-              },
-            ),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
           ],
         ),
       ),
