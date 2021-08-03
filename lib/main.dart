@@ -26,20 +26,45 @@ class _MyAppState extends State<MyApp> {
     //questa è la sintassi per inizializzare una 'map' che può essere anche inizializzata con Map()
     {
       'questionText': 'What\'s your favorite color?',
-      'answers': ['Black', 'Red', 'Green', 'White'],
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1},
+      ],
     },
     {
       'questionText': 'What\'s your favorite animal?',
-      'answers': ['Rabbit', 'Snake', 'Monkey', 'Lion'],
+      'answers': [
+        {'text': 'Rabbit', 'score': 1},
+        {'text': 'Snake', 'score': 1},
+        {'text': 'Monkey', 'score': 1},
+        {'text': 'Lion', 'score': 1},
+      ],
     },
     {
       'questionText': 'Who\'s your favorite football player?',
-      'answers': ['Messi', 'Ronaldo', 'Mbappe', 'Ronaldinho'],
+      'answers': [
+        {'text': 'Messi', 'score': 10},
+        {'text': 'Ronaldo', 'score': 9},
+        {'text': 'Mbappe', 'score': 8},
+        {'text': 'Ronaldinho', 'score': 100}
+      ],
     },
   ];
   int _questionIndex = 0;
+  int _totalScore = 0;
 
-  void _answerQuestion() {
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
+
     //funzione che impone a flutter di eseguire il rendering dell'interfaccia utente nuovamente.
     setState(() {
       _questionIndex = _questionIndex + 1;
@@ -67,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                   answerQuestion: _answerQuestion,
                   questionIndex: _questionIndex,
                   questions: _questions)
-              : Result()),
+              : Result(_totalScore, _resetQuiz)),
     );
   }
 }
